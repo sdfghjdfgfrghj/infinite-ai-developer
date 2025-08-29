@@ -1,0 +1,84 @@
+# 🤖 Autonomous AI Developer - Configuration
+# Phase A: Foundation policies and settings
+
+# Model sampling parameters for different AI roles
+sampling:
+  pm:
+    temperature: 0.3
+    top_p: 0.9
+    max_tokens: 2000
+  architect:
+    temperature: 0.4
+    top_p: 0.9
+    max_tokens: 3000
+  coder:
+    temperature: 0.2
+    top_p: 0.9
+    max_tokens: 4000
+  test_engineer:
+    temperature: 0.3
+    top_p: 0.9
+    max_tokens: 3000
+  debugger:
+    temperature: 0.3
+    top_p: 0.9
+    max_tokens: 2000
+  verifier:
+    temperature: 0.0
+    top_p: 0.9
+    max_tokens: 1000
+
+# Iteration and safety limits
+limits:
+  max_iterations: 1000
+  max_patches_per_failure: 5
+  max_patch_size_lines: 200
+  max_files_per_edit: 10
+  stall_detection_threshold: 3
+
+# Quality gates and thresholds
+gates:
+  coverage_min: 0.85
+  lint_zero_errors: true
+  bandit_required: true
+  type_check_required: true
+  max_complexity: 10
+
+# Sandbox configuration
+sandbox:
+  network: "none"
+  timeout_sec: 600
+  cpu_limit: "4"
+  mem_limit: "8g"
+  images:
+    python: "python:3.11-slim"
+    node: "node:18-slim"
+    ubuntu: "ubuntu:22.04"
+
+# Repository settings
+repository:
+  auto_commit: true
+  commit_message_template: "{type}({scope}): {summary}"
+  branch_naming: "autopilot/{feature}"
+  max_file_size_mb: 10
+
+# Model configuration
+model:
+  host: "http://172.26.240.1:11434"
+  name: "qwen3-coder:30b-a3b-q4_K_M"
+  timeout: 300
+  retry_attempts: 3
+
+# Logging and observability
+logging:
+  level: "INFO"
+  save_prompts: true
+  save_responses: true
+  metrics_enabled: true
+
+# Phase A specific settings
+phase_a:
+  enable_docker: true
+  fallback_to_local: true
+  test_mode: true
+  mock_ai_calls: false
