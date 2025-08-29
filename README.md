@@ -16,32 +16,54 @@ An AI system that takes natural language requirements and builds **complete, pro
 - ✅ **Never gives up** - keeps improving until all quality gates are met
 - 🎨 **Beautiful CLI** - professional interface with real-time progress and code display
 
-## ✨ Demo
+## ⚡ Quick Start
 
-![Infinite AI Demo](docs/demo.gif)
-
+### 1. Prerequisites Check
 ```bash
-# Just describe what you want - AI builds it completely!
-python3 main_infinite.py build "Create a task manager with user auth and real-time sync"
+# Run the quick verification script
+python3 quick_start.py
+```
 
-# Watch the AI iterate through:
-# ♾️ ITERATION 1/1000: AI Project Manager creating plan...
-# ♾️ ITERATION 2/1000: AI Architect designing architecture...
-# ♾️ ITERATION 3/1000: AI Coder writing implementation...
-# ♾️ ITERATION 4/1000: AI Test Engineer creating tests...
-# ♾️ ITERATION 5/1000: Running comprehensive tests...
-# 🐛 Tests failed - AI Debugger analyzing (debug cycle 1)...
-# 🔧 AI applying fixes...
-# ♾️ ITERATION 8/1000: Re-running tests...
-# ✅ All tests pass! AI Verifier checking completion...
-# 🎉 PROJECT COMPLETED SUCCESSFULLY!
+### 2. Install & Configure
+```bash
+# Clone the repository
+git clone https://github.com/sdfghjdfgfrghj/infinite-ai-developer.git
+cd infinite-ai-developer
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install and start Ollama (if not already installed)
+curl -fsSL https://ollama.ai/install.sh | sh
+ollama serve
+
+# Download a coding model
+ollama pull qwen2.5-coder:14b  # or qwen2.5-coder:32b for better results
+```
+
+### 3. Configure Your Model
+Edit `orchestrator/policies.yaml`:
+```yaml
+model:
+  host: "http://localhost:11434"
+  name: "qwen2.5-coder:14b"  # or your preferred model
+  timeout: 300
+```
+
+### 4. Build Your First App
+```bash
+# Simple test
+python3 main_infinite.py test --simple
+
+# Build a real application
+python3 main_infinite.py build "Create a task manager CLI with file persistence"
 ```
 
 ## 🎯 Key Features
 
 ### 🤖 **AI Actor System**
 - **Project Manager** - Creates comprehensive plans and acceptance tests
-- **Architect** - Designs robust system architecture
+- **Architect** - Designs robust system architecture  
 - **Coder** - Writes production-ready, executable code
 - **Test Engineer** - Creates comprehensive test suites
 - **Debugger** - Analyzes failures and applies fixes (up to 50 debug cycles!)
@@ -59,135 +81,142 @@ python3 main_infinite.py build "Create a task manager with user auth and real-ti
 - Professional panels and tables using Rich library
 - Detailed statistics and completion celebrations
 
-### 🏗️ **Production-Ready Output**
-- Complete applications with proper file structure
-- Comprehensive error handling and input validation
-- Full test suites with high coverage
-- Security checks and static analysis
-- Documentation and deployment instructions
+## 📊 What It Actually Builds
 
-## 🚀 Quick Start
+**Current Status: Beta - Python Applications**
 
-### Prerequisites
-- Python 3.11+
-- Local LLM (Ollama with 30B+ model recommended)
-- Git
+The system currently specializes in Python applications and has successfully built:
+- ✅ **CLI Applications** - Task managers, calculators, utilities
+- ✅ **Web APIs** - FastAPI applications with database integration
+- ✅ **Desktop Scripts** - File processors, automation tools
+- ✅ **Games** - Simple text-based and pygame applications
 
-### Installation
-```bash
-git clone https://github.com/yourusername/infinite-ai-developer.git
-cd infinite-ai-developer
-pip install -r requirements.txt
-```
-
-### Configuration
-Edit `orchestrator/policies.yaml`:
-```yaml
-model:
-  host: "http://localhost:11434"  # Your Ollama endpoint
-  name: "qwen3-coder:30b-a3b-q4_K_M"  # Your model
-
-infinite:
-  max_iterations: 1000
-  max_debug_cycles: 50
-  test_everything: true
-```
-
-### Usage
-```bash
-# Build a new application
-python3 main_infinite.py build "Create a web-based chat app with real-time messaging"
-
-# Resume a paused project
-python3 main_infinite.py resume run-abc123
-
-# Check project status
-python3 main_infinite.py status run-abc123
-
-# Test the system
-python3 main_infinite.py test --simple
-```
-
-## 📊 Example Results
-
-The AI has successfully built:
-- **Task Management CLIs** with user authentication and file persistence
-- **Web APIs** with FastAPI, database integration, and comprehensive testing
-- **Chat Applications** with real-time messaging and user management
-- **E-commerce Platforms** with payment processing and admin panels
-- **Desktop GUIs** with modern interfaces and robust error handling
-
-All with **100% test coverage**, **zero security vulnerabilities**, and **production-ready quality**.
+**Coming Soon:**
+- 🚧 JavaScript/TypeScript web applications
+- 🚧 Rust system applications
+- 🚧 Multi-language projects
 
 ## 🏗️ Architecture
 
 ```
 infinite-ai-developer/
-├── orchestrator/           # Core AI orchestration system
-│   ├── infinite_orchestrator.py  # Main infinite iteration engine
+├── main_infinite.py           # Main entry point
+├── quick_start.py            # Setup verification script
+├── orchestrator/             # Core AI orchestration
+│   ├── infinite_orchestrator.py  # Infinite iteration engine
 │   ├── ai_orchestrator.py        # AI actor coordination
-│   └── policies.yaml             # Configuration and limits
-├── ui/                    # Beautiful CLI interface
-│   ├── beautiful_cli.py   # Rich-based UI components
-│   └── live_monitor.py    # Real-time monitoring
-├── models/                # LLM integration
-│   ├── client.py          # Model client with retry logic
-│   └── schemas.py         # Response validation
-├── tools/                 # Development tools
-│   ├── sandbox.py         # Isolated testing environment
-│   └── repo_api.py        # Git and file operations
-└── projects/              # Generated applications
+│   └── policies.yaml             # Configuration
+├── ui/                      # Beautiful CLI interface
+│   └── beautiful_cli.py     # Rich-based UI components
+├── models/                  # LLM integration
+│   ├── client.py           # Model client
+│   └── schemas.py          # Response validation
+├── tools/                  # Development tools
+│   ├── sandbox.py          # Testing environment
+│   └── repo_api.py         # File operations
+└── projects/               # Generated applications
+```
+
+## 🔧 Configuration
+
+### Model Settings
+```yaml
+model:
+  host: "http://localhost:11434"     # Ollama endpoint
+  name: "qwen2.5-coder:14b"          # Model name
+  timeout: 300                       # Request timeout
+
+infinite:
+  max_iterations: 1000               # Maximum iterations
+  max_debug_cycles: 50               # Debug attempts per issue
+  test_everything: true              # Test after every phase
+```
+
+### Recommended Models
+- **qwen2.5-coder:32b** - Best results (requires 16GB+ RAM)
+- **qwen2.5-coder:14b** - Good balance (requires 8GB+ RAM)
+- **qwen2.5-coder:7b** - Faster, basic results (requires 4GB+ RAM)
+
+## 🧪 Example Usage
+
+```bash
+# Build a calculator
+python3 main_infinite.py build "Create a calculator with error handling and tests"
+
+# Build a web API
+python3 main_infinite.py build "Create a FastAPI todo list with SQLite database"
+
+# Build a game
+python3 main_infinite.py build "Create a text-based adventure game"
+
+# Resume a project
+python3 main_infinite.py resume run-abc123
+
+# Check project status
+python3 main_infinite.py status run-abc123
 ```
 
 ## 🤝 Contributing
 
-We welcome contributions! This project has huge potential and there are many ways to help:
+We welcome contributions! This is a real project with genuine potential.
 
-### 🔥 High-Impact Contributions
-- **New AI Actors** - Add specialized roles (DevOps Engineer, Security Analyst, etc.)
-- **Language Support** - Extend beyond Python to JavaScript, Rust, Go, etc.
-- **Quality Gates** - Add more sophisticated testing and verification
-- **UI Enhancements** - Web dashboard, VS Code extension, etc.
-- **Model Integration** - Support for more LLM providers and models
+### 🔥 High-Impact Areas
+- **Language Support** - Add JavaScript, Rust, Go support
+- **New AI Actors** - DevOps Engineer, Security Analyst, UI Designer
+- **Quality Gates** - Enhanced testing and verification
+- **UI Improvements** - Web dashboard, VS Code extension
+- **Documentation** - Tutorials, examples, guides
 
 ### 🛠️ Current Needs
-- [ ] Web dashboard for monitoring multiple projects
-- [ ] Support for containerized applications (Docker, Kubernetes)
-- [ ] Integration with cloud platforms (AWS, GCP, Azure)
-- [ ] Plugin system for custom AI actors
-- [ ] Performance optimizations for large projects
-- [ ] Multi-language support beyond Python
+- [ ] JavaScript/TypeScript support
+- [ ] Web dashboard for monitoring
+- [ ] Docker integration
+- [ ] Performance optimizations
+- [ ] More example projects
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📈 Roadmap
 
-### Phase 1: Foundation ✅
+### ✅ Phase 1: Foundation (Current)
 - [x] Core infinite iteration engine
-- [x] AI actor system with 6 specialized roles
-- [x] Beautiful CLI with Rich integration
-- [x] Comprehensive testing and debugging
+- [x] 6 specialized AI actors
+- [x] Beautiful CLI interface
+- [x] Python application generation
 
-### Phase 2: Scale & Polish 🚧
-- [ ] Web dashboard for project monitoring
-- [ ] Multi-language support (JavaScript, TypeScript, Rust)
-- [ ] Cloud deployment automation
+### 🚧 Phase 2: Expansion (Next 2-3 months)
+- [ ] JavaScript/TypeScript support
+- [ ] Web dashboard
+- [ ] Docker integration
 - [ ] Performance optimizations
 
-### Phase 3: Ecosystem 🔮
+### 🔮 Phase 3: Ecosystem (6+ months)
 - [ ] VS Code extension
-- [ ] GitHub Actions integration
-- [ ] Marketplace for custom AI actors
-- [ ] Enterprise features and support
+- [ ] Cloud deployment
+- [ ] Plugin marketplace
+- [ ] Enterprise features
 
-## 🎖️ Recognition
+## ⚠️ Current Limitations
 
-This project represents a breakthrough in autonomous software development. If you find it useful:
+**Be aware of these current limitations:**
+- **Python-focused** - Other languages coming soon
+- **Local LLM required** - No cloud API support yet
+- **Resource intensive** - Needs 8GB+ RAM for good models
+- **Beta software** - May have bugs and rough edges
+- **Limited testing** - Needs more real-world validation
 
-- ⭐ **Star the repo** to show support
-- 🐛 **Report issues** to help improve quality
-- 💡 **Suggest features** for future development
-- 🤝 **Contribute code** to join the revolution
+## 🐛 Known Issues
+
+- Git operations may fail on some Windows/WSL setups
+- Large projects (100+ files) may hit memory limits
+- Some model responses may not parse correctly
+- Docker integration is incomplete
+
+## 📞 Support
+
+- 🐛 **Issues**: [GitHub Issues](https://github.com/sdfghjdfgfrghj/infinite-ai-developer/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/sdfghjdfgfrghj/infinite-ai-developer/discussions)
+- 📖 **Documentation**: [INSTALLATION.md](INSTALLATION.md) | [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 📄 License
 
@@ -195,10 +224,13 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- Built with love for the open source community
-- Inspired by the vision of truly autonomous AI development
-- Special thanks to all contributors and early adopters
+- Built with passion for autonomous AI development
+- Inspired by the vision of truly self-improving software
+- Thanks to all contributors and early adopters
+- Special thanks to the Ollama and Rich library teams
 
 ---
 
-**⚡ Ready to revolutionize software development? Star this repo and let's build the future together!** ⚡
+**⚡ Ready to experience infinite AI iterations? Star this repo and let's build the future together!** ⚡
+
+*Note: This is beta software. Please report issues and contribute to make it better!*
